@@ -125,17 +125,93 @@
 // }
 
 
+// import 'package:flutter/material.dart';
+// import 'package:logger/logger.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// var logger = Logger(
+//   filter: ProductionFilter(), // Configure the filter as needed
+//   printer: PrettyPrinter(), // Use PrettyPrinter for a readable output
+// );
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: const Text('Logging App'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               ElevatedButton(
+//                 onPressed: () {
+//                   logger.d('Debug Message: Button pressed!');
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.blue,
+//                 ),
+//                 child: const Text(
+//                   'Debug Log',
+//                   style: TextStyle(color: Colors.black),
+//                 ),
+//               ),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   logger.i('Info Message: Button pressed!');
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.green,
+//                 ),
+//                 child: const Text(
+//                   'Info Log',
+//                   style: TextStyle(color: Colors.black),
+//                 ),
+//               ),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   logger.w('Warning Message: Button pressed!');
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.orange,
+//                 ),
+//                 child: const Text(
+//                   'Warning Log',
+//                   style: TextStyle(color: Colors.black),
+//                 ),
+//               ),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   logger.e('Error Message: Button pressed!');
+//                 },
+//                 style: ElevatedButton.styleFrom(
+//                   backgroundColor: Colors.red,
+//                 ),
+//                 child: const Text(
+//                   'Error Log',
+//                   style: TextStyle(color: Colors.black),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
 
 void main() {
   runApp(const MyApp());
 }
-
-var logger = Logger(
-  filter: ProductionFilter(), // Configure the filter as needed
-  printer: PrettyPrinter(), // Use PrettyPrinter for a readable output
-);
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -143,65 +219,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Logging App'),
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
+      home: Builder(
+        builder: (BuildContext context) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Custom Error Screen Example'),
+            ),
+            body: Center(
+              child: ElevatedButton(
                 onPressed: () {
-                  logger.d('Debug Message: Button pressed!');
+                  _triggerError(context);
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                ),
-                child: const Text(
-                  'Debug Log',
-                  style: TextStyle(color: Colors.black),
-                ),
+                child: const Text('Trigger Error'),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  logger.i('Info Message: Button pressed!');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
-                ),
-                child: const Text(
-                  'Info Log',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  logger.w('Warning Message: Button pressed!');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
-                ),
-                child: const Text(
-                  'Warning Log',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  logger.e('Error Message: Button pressed!');
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
-                ),
-                child: const Text(
-                  'Error Log',
-                  style: TextStyle(color: Colors.black),
-                ),
-              ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
+      ),
+      builder: (BuildContext context, Widget? widget) {
+        ErrorWidget.builder = (FlutterErrorDetails details) {
+          return _buildCustomErrorScreen();
+        };
+        return widget!;
+      },
+    );
+  }
+
+  void _triggerError(BuildContext context) {
+    throw Exception('This is an example error');
+  }
+
+  Widget _buildCustomErrorScreen() {
+    return const Center(
+      child: Text(
+        'Custom Error Screen',
+        style: TextStyle(color: Colors.red),
       ),
     );
   }
