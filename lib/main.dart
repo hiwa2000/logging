@@ -29,32 +29,73 @@
 // }
 
 
+// import 'package:flutter/material.dart';
+// import 'package:flutter/foundation.dart';
+
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyLogger {
+//   static void debug(String message) {
+//     if (kDebugMode) {
+//       print('DEBUG: $message');
+//     }
+//   }
+
+//   static void info(String message) {
+//     print('INFO: $message');
+//   }
+
+//   static void warning(String message) {
+//     print('WARNING: $message');
+//   }
+
+//   static void error(String message) {
+//     print('ERROR: $message');
+//   }
+// }
+
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Logging App'),
+//         ),
+//         body: Center(
+//           child: Column(
+//             mainAxisAlignment: MainAxisAlignment.center,
+//             children: [
+//               ElevatedButton(
+//                 onPressed: () {
+//                   MyLogger.debug('Debug message: Button was pressed!');
+//                    MyLogger.info('Info message: Button was pressed!');
+//                    MyLogger.warning('Warning message: Button was pressed!');
+//                    MyLogger.error('Error message: Button was pressed!');
+//                 },
+//                 child: Text('Press button'),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+import 'package:logger/logger.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyLogger {
-  static void debug(String message) {
-    if (kDebugMode) {
-      print('DEBUG: $message');
-    }
-  }
-
-  static void info(String message) {
-    print('INFO: $message');
-  }
-
-  static void warning(String message) {
-    print('WARNING: $message');
-  }
-
-  static void error(String message) {
-    print('ERROR: $message');
-  }
-}
+var logger = Logger(
+  filter: ProductionFilter(), // Konfiguriere den Filter nach Bedarf
+  printer: PrettyPrinter(), // Verwende PrettyPrinter für eine gut lesbare Ausgabe
+);
 
 class MyApp extends StatelessWidget {
   @override
@@ -65,19 +106,14 @@ class MyApp extends StatelessWidget {
           title: Text('Logging App'),
         ),
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  MyLogger.debug('Debug message: Button was pressed!');
-                   MyLogger.info('Info message: Button was pressed!');
-                   MyLogger.warning('Warning message: Button was pressed!');
-                   MyLogger.error('Error message: Button was pressed!');
-                },
-                child: Text('Press button'),
-              ),
-            ],
+          child: ElevatedButton(
+            onPressed: () {
+              logger.d('Debug message: Button was pressed!');
+              logger.i('Info message: Button was pressed!');
+              logger.w('Warning message: Button was pressed!');
+              logger.e('Error message: Button was pressed!');
+            },
+            child: Text('Press button'),
           ),
         ),
       ),
