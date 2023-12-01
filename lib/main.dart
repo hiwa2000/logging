@@ -28,61 +28,61 @@
 //   }
 // }
 
-// import 'package:flutter/material.dart';
-// import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
-// void main() {
-//   runApp(MyApp());
-// }
+void main() {
+  runApp(MyApp());
+}
 
-// class MyLogger {
-//   static void debug(String message) {
-//     if (kDebugMode) {
-//       print('DEBUG: $message');
-//     }
-//   }
+class MyLogger {
+  static void debug(String message) {
+    if (kDebugMode) {
+      print('DEBUG: $message');
+    }
+  }
 
-//   static void info(String message) {
-//     print('INFO: $message');
-//   }
+  static void info(String message) {
+    print('INFO: $message');
+  }
 
-//   static void warning(String message) {
-//     print('WARNING: $message');
-//   }
+  static void warning(String message) {
+    print('WARNING: $message');
+  }
 
-//   static void error(String message) {
-//     print('ERROR: $message');
-//   }
-// }
+  static void error(String message) {
+    print('ERROR: $message');
+  }
+}
 
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       home: Scaffold(
-//         appBar: AppBar(
-//           title: Text('Logging App'),
-//         ),
-//         body: Center(
-//           child: Column(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//               ElevatedButton(
-//                 onPressed: () {
-//                   MyLogger.debug('Debug message: Button was pressed!');
-//                    MyLogger.info('Info message: Button was pressed!');
-//                    MyLogger.warning('Warning message: Button was pressed!');
-//                    MyLogger.error('Error message: Button was pressed!');
-//                 },
-//                 child: Text('Press button'),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Logging App'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  MyLogger.debug('Debug message: Button was pressed!');
+                   MyLogger.info('Info message: Button was pressed!');
+                   MyLogger.warning('Warning message: Button was pressed!');
+                   MyLogger.error('Error message: Button was pressed!');
+                },
+                child: Text('Press button'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
 // import 'package:flutter/material.dart';
 // import 'package:logger/logger.dart';
@@ -207,54 +207,54 @@
 //   }
 // }
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Builder(
-        builder: (BuildContext context) {
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text('Custom Error Screen Example'),
-            ),
-            body: Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  _triggerError(context);
-                },
-                child: const Text('Trigger Error'),
-              ),
-            ),
-          );
-        },
-      ),
-      builder: (BuildContext context, Widget? widget) {
-        ErrorWidget.builder = (FlutterErrorDetails details) {
-          return _buildCustomErrorScreen();
-        };
-        return widget!;
-      },
-    );
-  }
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Builder(
+//         builder: (BuildContext context) {
+//           return Scaffold(
+//             appBar: AppBar(
+//               title: const Text('Custom Error Screen Example'),
+//             ),
+//             body: Center(
+//               child: ElevatedButton(
+//                 onPressed: () {
+//                   _triggerError(context);
+//                 },
+//                 child: const Text('Trigger Error'),
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//       builder: (BuildContext context, Widget? widget) {
+//         ErrorWidget.builder = (FlutterErrorDetails details) {
+//           return _buildCustomErrorScreen();
+//         };
+//         return widget!;
+//       },
+//     );
+//   }
 
-  void _triggerError(BuildContext context) {
-    throw Exception('This is an example error');
-  }
+//   void _triggerError(BuildContext context) {
+//     throw Exception('This is an example error');
+//   }
 
-  Widget _buildCustomErrorScreen() {
-    return const Center(
-      child: Text(
-        'Custom Error Screen',
-        style: TextStyle(color: Colors.red),
-      ),
-    );
-  }
-}
+//   Widget _buildCustomErrorScreen() {
+//     return const Center(
+//       child: Text(
+//         'Custom Error Screen',
+//         style: TextStyle(color: Colors.red),
+//       ),
+//     );
+//   }
+// }
